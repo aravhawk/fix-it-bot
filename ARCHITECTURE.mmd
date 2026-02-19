@@ -1,0 +1,39 @@
+graph TD
+    CONSUMER(["Consumer App<br/>imports FixItBot + styles.css"])
+    INDEX["index.ts<br/>Barrel exports"]
+    FIXITBOT["FixItBot.tsx<br/>Theme wrapper + Toaster"]
+    FORM["BugReportForm.tsx<br/>Form with validation"]
+    UI["ui/*<br/>7 shadcn/Radix components"]
+    TYPES["types.ts<br/>Props, Config, Theme, Labels"]
+    VALIDATION["validation.ts<br/>Zod schema"]
+    WEBHOOK["webhook.ts<br/>submitToKilo fetch"]
+    CSS["fix-it-bot.css<br/>Scoped Tailwind theme"]
+    KILO["Kilo Webhook<br/>AI Agent API"]
+    GITHUB["GitHub<br/>Pull Request"]
+
+    CONSUMER --> INDEX
+    INDEX --> FIXITBOT
+    INDEX --> TYPES
+    INDEX --> VALIDATION
+    FIXITBOT --> FORM
+    FIXITBOT --> UI
+    FORM --> UI
+    FORM --> VALIDATION
+    FORM --> WEBHOOK
+    WEBHOOK -->|"POST"| KILO
+    KILO -->|"Creates PR"| GITHUB
+    FORM --> TYPES
+    FIXITBOT --> TYPES
+    CONSUMER --> CSS
+
+    style CONSUMER fill:#e74c3c,color:#fff
+    style INDEX fill:#2980b9,color:#fff
+    style FIXITBOT fill:#2980b9,color:#fff
+    style FORM fill:#2980b9,color:#fff
+    style UI fill:#8e44ad,color:#fff
+    style TYPES fill:#8e44ad,color:#fff
+    style VALIDATION fill:#8e44ad,color:#fff
+    style WEBHOOK fill:#16a085,color:#fff
+    style CSS fill:#8e44ad,color:#fff
+    style KILO fill:#e67e22,color:#fff
+    style GITHUB fill:#27ae60,color:#fff

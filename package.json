@@ -1,0 +1,77 @@
+{
+  "name": "fix-it-bot-react",
+  "version": "1.0.0",
+  "description": "Drop-in React component for submitting bug reports to Kilo AI agents",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./styles.css": "./dist/fix-it-bot.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:js": "tsup",
+    "build:css": "tailwindcss -i src/styles/fix-it-bot.css -o dist/fix-it-bot.css --minify",
+    "build": "pnpm build:js && pnpm build:css",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "react",
+    "bug-report",
+    "kilo",
+    "ai-agent",
+    "fix-it-bot"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aravhawk/fix-it-bot.git"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.31.0",
+    "lucide-react": "^0.563.0",
+    "react-hook-form": "^7.71.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "tsup": "^8",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher"
+    ]
+  }
+}
