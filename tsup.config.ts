@@ -6,7 +6,7 @@ export default defineConfig({
   dts: true,
   splitting: false,
   sourcemap: true,
-  clean: true,
+  clean: false, // dist is cleaned in the build script before CSS compilation
   external: ["react", "react-dom"],
   banner: {
     js: '"use client";',

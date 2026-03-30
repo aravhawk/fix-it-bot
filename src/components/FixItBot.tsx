@@ -2,7 +2,8 @@ import * as React from "react"
 import { BugReportForm } from "./BugReportForm"
 import { Toaster } from "./ui/sonner"
 import { cn } from "../lib/utils"
-import type { FixItBotProps, FixItBotTheme } from "../lib/types"
+import { injectStyles } from "../lib/inject-styles"
+import type { FixItBotProps, FixItBotConfig, FixItBotTheme } from "../lib/types"
 
 function buildThemeStyle(theme?: FixItBotTheme): React.CSSProperties {
   if (!theme) return {}
@@ -22,14 +23,28 @@ function buildThemeStyle(theme?: FixItBotTheme): React.CSSProperties {
   return style as React.CSSProperties
 }
 
-export function FixItBot({
-  config,
-  theme,
-  labels,
-  callbacks,
-  className,
-  disableToaster,
-}: FixItBotProps) {
+function resolveConfig(props: FixItBotProps): FixItBotConfig {
+  // If `config` is provided, use it (flat props can still override)
+  const base = props.config ?? { webhookUrl: "" }
+
+  return {
+    webhookUrl: props.webhookUrl ?? base.webhookUrl,
+    apiKey: props.apiKey ?? base.apiKey,
+    repoUrl: props.repoUrl ?? base.repoUrl,
+    defaultBranch: props.defaultBranch ?? base.defaultBranch,
+    defaultLanguage: props.defaultLanguage ?? base.defaultLanguage,
+  }
+}
+
+export function FixItBot(props: FixItBotProps) {
+  const { theme, labels, callbacks, className, disableToaster } = props
+
+  // Auto-inject styles — no separate CSS import needed
+  React.useEffect(() => {
+    injectStyles()
+  }, [])
+
+  const config = resolveConfig(props)
   const mode = theme?.mode === "light" ? "light" : ""
 
   return (
