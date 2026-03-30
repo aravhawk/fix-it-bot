@@ -65,8 +65,11 @@ export interface FixItBotCallbacks {
 }
 
 export interface FixItBotProps {
-  /** Required configuration including webhook URL */
-  config: FixItBotConfig
+  /**
+   * Required configuration including webhook URL.
+   * You can pass this object OR use the flat shorthand props below.
+   */
+  config?: FixItBotConfig
   /** Optional theme overrides */
   theme?: FixItBotTheme
   /** Optional label/text overrides */
@@ -77,4 +80,17 @@ export interface FixItBotProps {
   className?: string
   /** Set to true if you already have a Sonner Toaster in your app */
   disableToaster?: boolean
+
+  // ── Flat shorthand props (alternative to `config`) ──────────────
+
+  /** Kilo webhook URL — shorthand for config.webhookUrl */
+  webhookUrl?: string
+  /** Optional Bearer token — shorthand for config.apiKey */
+  apiKey?: string
+  /** Lock the repo (enables Support Portal Mode) — shorthand for config.repoUrl */
+  repoUrl?: string
+  /** Default branch name — shorthand for config.defaultBranch */
+  defaultBranch?: string
+  /** Default language — shorthand for config.defaultLanguage */
+  defaultLanguage?: string
 }

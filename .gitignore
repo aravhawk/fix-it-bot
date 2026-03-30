@@ -30,3 +30,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# auto-generated
+src/lib/__styles.generated.ts

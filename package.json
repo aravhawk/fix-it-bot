@@ -19,7 +19,9 @@
     "./styles.css": "./dist/fix-it-bot.css"
   },
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "dist/index.js",
+    "dist/index.mjs"
   ],
   "files": [
     "dist"
@@ -27,7 +29,8 @@
   "scripts": {
     "build:js": "tsup",
     "build:css": "tailwindcss -i src/styles/fix-it-bot.css -o dist/fix-it-bot.css --minify",
-    "build": "pnpm build:js && pnpm build:css",
+    "build:gen": "node scripts/gen-styles.mjs",
+    "build": "rm -rf dist && pnpm build:css && pnpm build:gen && pnpm build:js",
     "dev": "tsup --watch"
   },
   "keywords": [
